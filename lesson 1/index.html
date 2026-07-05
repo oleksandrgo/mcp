@@ -28,8 +28,19 @@
             width="280"
             height="39"
           />
-          <p class="slide__eyebrow js-reveal">IT · Model Context Protocol</p>
+          <p class="slide__eyebrow js-reveal">
+            <span class="slide__tech-chip">
+              <img src="../video%20and%20pcitures/icons/mcp.png" alt="" width="20" height="20" />
+              IT · Model Context Protocol
+            </span>
+          </p>
           <h1 class="slide__title js-reveal">Введення в MCP</h1>
+          <div class="tech-chips js-reveal" aria-hidden="true">
+            <span class="tech-chip"><img src="../video%20and%20pcitures/icons/mcp.png" alt="" />MCP</span>
+            <span class="tech-chip"><img src="../video%20and%20pcitures/icons/figma.png" alt="" />Figma</span>
+            <span class="tech-chip"><img src="../video%20and%20pcitures/icons/postman.png" alt="" />API</span>
+            <span class="tech-chip"><img src="../video%20and%20pcitures/icons/mysql.png" alt="" />MySQL</span>
+          </div>
         </div>
       </section>
 
@@ -45,14 +56,17 @@
           <ol class="plan-list">
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">01</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/mcp.png" alt="" width="32" height="32" />
               <span class="plan-list__text">Введення до MCP</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">02</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/figma.png" alt="" width="32" height="32" />
               <span class="plan-list__text">Практичні сценарії</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">03</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg" alt="" width="32" height="32" />
               <span class="plan-list__text">Висновки</span>
             </li>
           </ol>
@@ -60,12 +74,18 @@
       </section>
 
       <!-- Block 1: Введення -->
-      <section class="slide" aria-label="Блок 1 — Введення до MCP">
+      <section class="slide slide--block-intro" aria-label="Блок 1 — Введення до MCP">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow" aria-hidden="true"></div>
+        <img
+          class="slide__watermark"
+          src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg"
+          alt=""
+          aria-hidden="true"
+        />
         <div class="slide__inner slide__inner--title">
           <p class="slide__eyebrow js-reveal">Блок 1</p>
           <h2 class="slide__title js-reveal">Введення до MCP</h2>
@@ -156,7 +176,13 @@
             <div class="mcp-flow__lane">
               <div class="mcp-flow__agents mcp-flow__step">
                 <div class="mcp-flow__node mcp-flow__node--agent">
-                  <span class="mcp-flow__badge">AI</span>
+                  <img
+                    class="mcp-flow__agent-icon"
+                    src="../video%20and%20pcitures/icons/chatgpt.png"
+                    alt=""
+                    width="40"
+                    height="40"
+                  />
                   <span class="mcp-flow__label">Агент</span>
                   <span class="mcp-flow__hint">Cursor · Claude · VS Code</span>
                 </div>
@@ -171,7 +197,13 @@
                 </div>
                 <div class="mcp-flow__hub">
                   <span class="mcp-flow__hub-ring" aria-hidden="true"></span>
-                  <span class="mcp-flow__hub-tag">MCP</span>
+                  <img
+                    class="mcp-flow__hub-icon"
+                    src="../video%20and%20pcitures/icons/mcp.png"
+                    alt=""
+                    width="36"
+                    height="36"
+                  />
                   <span class="mcp-flow__hub-title">Server</span>
                   <span class="mcp-flow__hub-sub">Одна інтеграція</span>
                 </div>
@@ -186,19 +218,27 @@
                 </div>
                 <div class="mcp-flow__services">
                   <div class="mcp-flow__node mcp-flow__node--service">
-                    <span class="mcp-flow__service-icon">@</span>
+                    <span class="mcp-flow__service-icon">
+                      <img src="../video%20and%20pcitures/icons/email.svg" alt="" width="22" height="22" />
+                    </span>
                     <span class="mcp-flow__label">Email</span>
                   </div>
                   <div class="mcp-flow__node mcp-flow__node--service">
-                    <span class="mcp-flow__service-icon">DB</span>
+                    <span class="mcp-flow__service-icon">
+                      <img src="../video%20and%20pcitures/icons/mysql.png" alt="" width="22" height="22" />
+                    </span>
                     <span class="mcp-flow__label">База даних</span>
                   </div>
                   <div class="mcp-flow__node mcp-flow__node--service">
-                    <span class="mcp-flow__service-icon">API</span>
+                    <span class="mcp-flow__service-icon">
+                      <img src="../video%20and%20pcitures/icons/postman.png" alt="" width="22" height="22" />
+                    </span>
                     <span class="mcp-flow__label">Зовнішні API</span>
                   </div>
                   <div class="mcp-flow__node mcp-flow__node--service">
-                    <span class="mcp-flow__service-icon">N</span>
+                    <span class="mcp-flow__service-icon">
+                      <img src="../video%20and%20pcitures/icons/notion.svg" alt="" width="22" height="22" />
+                    </span>
                     <span class="mcp-flow__label">Notion</span>
                   </div>
                 </div>
@@ -245,12 +285,18 @@
       </section>
 
       <!-- Block 2 — Сценарії -->
-      <section class="slide" aria-label="Блок 2 — Сценарії">
+      <section class="slide slide--block-intro" aria-label="Блок 2 — Сценарії">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow" aria-hidden="true"></div>
+        <img
+          class="slide__watermark"
+          src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg"
+          alt=""
+          aria-hidden="true"
+        />
         <div class="slide__inner slide__inner--title">
           <p class="slide__eyebrow js-reveal">Блок 2</p>
           <h2 class="slide__title js-reveal">Практичні сценарії</h2>
@@ -283,17 +329,28 @@
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--scenario">
           <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
-          <h2 class="slide__heading js-reveal">Персональний асистент</h2>
-          <p class="slide__lead js-reveal">
-            AI-помічник у Cursor або Claude Desktop бачить календар, нотатки в Notion і список задач —
-            одночасно, без перемикання між вкладками.
-          </p>
-          <p class="slide__lead js-reveal">
-            Ви пишете «створи зустріч на завтра» або «додай нотатку до проєкту» — агент сам обирає
-            потрібний <strong>tool</strong> і виконує дію через MCP.
-          </p>
+          <div class="scenario-card">
+            <img
+              class="scenario-card__icon js-reveal"
+              src="../video%20and%20pcitures/icons/chatgpt.png"
+              alt=""
+              width="48"
+              height="48"
+            />
+            <div class="scenario-card__body">
+              <h2 class="slide__heading js-reveal">Персональний асистент</h2>
+              <p class="slide__lead js-reveal">
+                AI-помічник у Cursor або Claude Desktop бачить календар, нотатки в Notion і список задач —
+                одночасно, без перемикання між вкладками.
+              </p>
+              <p class="slide__lead js-reveal">
+                Ви пишете «створи зустріч на завтра» або «додай нотатку до проєкту» — агент сам обирає
+                потрібний <strong>tool</strong> і виконує дію через MCP.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -303,17 +360,28 @@
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--scenario">
           <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
-          <h2 class="slide__heading js-reveal">Design-to-code</h2>
-          <p class="slide__lead js-reveal">
-            Дизайнер передає макет у Figma. Розробник просить AI згенерувати компонент «як на макеті» —
-            без ручного копіювання розмірів і кольорів.
-          </p>
-          <p class="slide__lead js-reveal">
-            <strong>Figma MCP</strong> дає агенту доступ до структури файлу: компоненти, токени, відступи.
-            Код виходить набагато ближчим до дизайну, ніж генерація «на око».
-          </p>
+          <div class="scenario-card">
+            <img
+              class="scenario-card__icon js-reveal"
+              src="../video%20and%20pcitures/icons/figma.png"
+              alt=""
+              width="48"
+              height="48"
+            />
+            <div class="scenario-card__body">
+              <h2 class="slide__heading js-reveal">Design-to-code</h2>
+              <p class="slide__lead js-reveal">
+                Дизайнер передає макет у Figma. Розробник просить AI згенерувати компонент «як на макеті» —
+                без ручного копіювання розмірів і кольорів.
+              </p>
+              <p class="slide__lead js-reveal">
+                <strong>Figma MCP</strong> дає агенту доступ до структури файлу: компоненти, токени, відступи.
+                Код виходить набагато ближчим до дизайну, ніж генерація «на око».
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -323,17 +391,28 @@
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--scenario">
           <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
-          <h2 class="slide__heading js-reveal">Enterprise-аналітика</h2>
-          <p class="slide__lead js-reveal">
-            У компанії дані розкидані по CRM, warehouse і внутрішніх API. Менеджер запитує в чаті:
-            «Скільки угод закрили минулого кварталу?» — без SQL і без пʼяти вкладок.
-          </p>
-          <p class="slide__lead js-reveal">
-            MCP-сервери підключають системи до корпоративного асистента. IT контролює доступ на рівні
-            серверів — без переписування інтеграцій під кожен новий AI-інструмент.
-          </p>
+          <div class="scenario-card">
+            <img
+              class="scenario-card__icon js-reveal"
+              src="../video%20and%20pcitures/icons/jira.png"
+              alt=""
+              width="48"
+              height="48"
+            />
+            <div class="scenario-card__body">
+              <h2 class="slide__heading js-reveal">Enterprise-аналітика</h2>
+              <p class="slide__lead js-reveal">
+                У компанії дані розкидані по CRM, warehouse і внутрішніх API. Менеджер запитує в чаті:
+                «Скільки угод закрили минулого кварталу?» — без SQL і без пʼяти вкладок.
+              </p>
+              <p class="slide__lead js-reveal">
+                MCP-сервери підключають системи до корпоративного асистента. IT контролює доступ на рівні
+                серверів — без переписування інтеграцій під кожен новий AI-інструмент.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -343,17 +422,28 @@
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--scenario">
           <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
-          <h2 class="slide__heading js-reveal">Спробувати в Cursor</h2>
-          <p class="slide__lead js-reveal">
-            Щоб підключити MCP-сервер, додайте його в налаштування Cursor — наприклад, Notion MCP
-            через поле <strong>mcpServers</strong> у конфігурації.
-          </p>
-          <p class="slide__lead js-reveal">
-            Після збереження агент отримує tools для пошуку, читання та створення сторінок у Notion.
-            GitLab, Figma та інші сервери підключаються за тим самим принципом.
-          </p>
+          <div class="scenario-card">
+            <img
+              class="scenario-card__icon js-reveal"
+              src="../video%20and%20pcitures/icons/mcp.png"
+              alt=""
+              width="48"
+              height="48"
+            />
+            <div class="scenario-card__body">
+              <h2 class="slide__heading js-reveal">Спробувати в Cursor</h2>
+              <p class="slide__lead js-reveal">
+                Щоб підключити MCP-сервер, додайте його в налаштування Cursor — наприклад, Notion MCP
+                через поле <strong>mcpServers</strong> у конфігурації.
+              </p>
+              <p class="slide__lead js-reveal">
+                Після збереження агент отримує tools для пошуку, читання та створення сторінок у Notion.
+                GitLab, Figma та інші сервери підключаються за тим самим принципом.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -384,6 +474,7 @@
 
     <nav class="nav" aria-label="Навігація по слайдах">
       <button type="button" class="nav__btn" id="prev" aria-label="Попередній слайд">←</button>
+      <span class="nav__progress" id="navProgress" aria-live="polite">1 / 17</span>
       <div class="nav__dots" id="dots" role="tablist" aria-label="Слайди"></div>
       <button type="button" class="nav__btn" id="next" aria-label="Наступний слайд">→</button>
     </nav>
