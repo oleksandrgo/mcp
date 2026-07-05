@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hillel MAX — Урок 1 · Введення в MCP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="deck" id="deck">
+      <section class="slide slide--active" data-slide="0" aria-label="Титульний слайд">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/main%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--title">
+          <img
+            class="slide__logo"
+            src="../video%20and%20pcitures/Hillel%20MAX%20Logo/logo-w.svg"
+            alt="Hillel MAX"
+            width="280"
+            height="39"
+          />
+          <p class="slide__eyebrow js-reveal">IT · Model Context Protocol</p>
+          <h1 class="slide__title js-reveal">Введення в MCP</h1>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="1" aria-label="План заняття">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim slide__scrim--plan"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--plan">
+          <p class="slide__eyebrow slide__eyebrow--accent js-reveal-plan-header">Урок 1</p>
+          <h2 class="slide__heading js-reveal-plan-header">План заняття</h2>
+          <ol class="plan-list">
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">01</span>
+              <span class="plan-list__text">Введення до MCP</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">02</span>
+              <span class="plan-list__text">Практичні сценарії</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">03</span>
+              <span class="plan-list__text">Висновки</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Block 1: Введення -->
+      <section class="slide" aria-label="Блок 1 — Введення до MCP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--title">
+          <p class="slide__eyebrow js-reveal">Блок 1</p>
+          <h2 class="slide__title js-reveal">Введення до MCP</h2>
+          <p class="slide__subtitle js-reveal">Чому виникла потреба в стандарті</p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Контекст">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">AI-агенти та зовнішні сервіси</h2>
+          <p class="slide__lead js-reveal">
+            Агенти надсилають повідомлення, працюють з email, базами даних і API. Для цього потрібен
+            <strong>кастомний код</strong> і обгортка у вигляді tools для кожного сервісу.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Основна проблема">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">Основна проблема</h2>
+          <ul class="content-list">
+            <li class="content-list__item js-reveal">Інтеграції жорстко привʼязані до одного середовища (наприклад, Cursor)</li>
+            <li class="content-list__item js-reveal">Інший агент або платформа — інтеграцію треба робити заново</li>
+            <li class="content-list__item js-reveal">Кожен новий агент = нова інтеграція</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Наслідки">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">Наслідки такого підходу</h2>
+          <ul class="content-list">
+            <li class="content-list__item js-reveal">Дублювання коду</li>
+            <li class="content-list__item js-reveal">Зростання витрат на розробку</li>
+            <li class="content-list__item js-reveal">Складність підтримки та масштабування</li>
+            <li class="content-list__item js-reveal">Відсутність стандартизації</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Рішення MCP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">Рішення: MCP</h2>
+          <p class="slide__lead js-reveal">
+            <strong>Model Context Protocol</strong> додає рівень абстракції — єдиний стандарт між агентами,
+            tools і зовнішніми сервісами.
+          </p>
+          <p class="slide__lead js-reveal">
+            Інтеграція один раз → MCP-сервер → будь-який агент з підтримкою MCP.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide slide--diagram diagram-slide" aria-label="Схема MCP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim slide__scrim--plan"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--diagram">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">Як це працює</h2>
+          <div class="mcp-flow js-reveal" role="img" aria-label="Агент підключається до MCP-сервера, який надає доступ до зовнішніх сервісів">
+            <div class="mcp-flow__lane">
+              <div class="mcp-flow__agents mcp-flow__step">
+                <div class="mcp-flow__node mcp-flow__node--agent">
+                  <span class="mcp-flow__badge">AI</span>
+                  <span class="mcp-flow__label">Агент</span>
+                  <span class="mcp-flow__hint">Cursor · Claude · VS Code</span>
+                </div>
+                <p class="mcp-flow__note">Потребує доступ до різних сервісів</p>
+              </div>
+
+              <div class="mcp-flow__hub-group mcp-flow__step">
+                <div class="mcp-flow__pipe mcp-flow__pipe--left" aria-hidden="true">
+                  <span class="mcp-flow__line"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--a"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--b"></span>
+                </div>
+                <div class="mcp-flow__hub">
+                  <span class="mcp-flow__hub-ring" aria-hidden="true"></span>
+                  <span class="mcp-flow__hub-tag">MCP</span>
+                  <span class="mcp-flow__hub-title">Server</span>
+                  <span class="mcp-flow__hub-sub">Одна інтеграція</span>
+                </div>
+              </div>
+
+              <div class="mcp-flow__services-group mcp-flow__step">
+                <div class="mcp-flow__pipe mcp-flow__pipe--right" aria-hidden="true">
+                  <span class="mcp-flow__line"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--a"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--b"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--c"></span>
+                </div>
+                <div class="mcp-flow__services">
+                  <div class="mcp-flow__node mcp-flow__node--service">
+                    <span class="mcp-flow__service-icon">@</span>
+                    <span class="mcp-flow__label">Email</span>
+                  </div>
+                  <div class="mcp-flow__node mcp-flow__node--service">
+                    <span class="mcp-flow__service-icon">DB</span>
+                    <span class="mcp-flow__label">База даних</span>
+                  </div>
+                  <div class="mcp-flow__node mcp-flow__node--service">
+                    <span class="mcp-flow__service-icon">API</span>
+                    <span class="mcp-flow__label">Зовнішні API</span>
+                  </div>
+                  <div class="mcp-flow__node mcp-flow__node--service">
+                    <span class="mcp-flow__service-icon">N</span>
+                    <span class="mcp-flow__label">Notion</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="mcp-flow__caption mcp-flow__step">
+              Агент підключається до <strong>MCP-сервера</strong> — і отримує tools для всіх сервісів без окремої розробки
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Що це дає">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">Що це дає</h2>
+          <ul class="content-list">
+            <li class="content-list__item js-reveal">Одна інтеграція для багатьох агентів</li>
+            <li class="content-list__item js-reveal">Повторне використання логіки</li>
+            <li class="content-list__item js-reveal">Швидке масштабування</li>
+            <li class="content-list__item js-reveal">Зниження вартості розробки</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Ефект екосистеми">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Введення до MCP</p>
+          <h2 class="slide__heading js-reveal">Ефект екосистеми</h2>
+          <p class="slide__lead js-reveal">
+            MCP створює <strong>мережевий ефект</strong>: більше серверів і агентів — більше можливостей для всіх учасників.
+          </p>
+        </div>
+      </section>
+
+      <!-- Block 2 — Сценарії -->
+      <section class="slide" aria-label="Блок 2 — Сценарії">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--title">
+          <p class="slide__eyebrow js-reveal">Блок 2</p>
+          <h2 class="slide__title js-reveal">Практичні сценарії</h2>
+          <p class="slide__subtitle js-reveal">Де MCP уже працює сьогодні</p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Контекст сценаріїв">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
+          <h2 class="slide__heading js-reveal">MCP у повсякденній роботі</h2>
+          <p class="slide__lead js-reveal">
+            Протокол використовують не лише розробники — будь-який користувач AI-інструмента може підключити
+            зовнішні сервіси через MCP-сервери і працювати з ними в одному чаті.
+          </p>
+          <p class="slide__lead js-reveal">
+            Розглянемо три типові ситуації: особистий асистент, design-to-code і корпоративна аналітика.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Персональний асистент">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/ice%20cubes.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
+          <h2 class="slide__heading js-reveal">Персональний асистент</h2>
+          <p class="slide__lead js-reveal">
+            AI-помічник у Cursor або Claude Desktop бачить календар, нотатки в Notion і список задач —
+            одночасно, без перемикання між вкладками.
+          </p>
+          <p class="slide__lead js-reveal">
+            Ви пишете «створи зустріч на завтра» або «додай нотатку до проєкту» — агент сам обирає
+            потрібний <strong>tool</strong> і виконує дію через MCP.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Design-to-code">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/ice%20cubes.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
+          <h2 class="slide__heading js-reveal">Design-to-code</h2>
+          <p class="slide__lead js-reveal">
+            Дизайнер передає макет у Figma. Розробник просить AI згенерувати компонент «як на макеті» —
+            без ручного копіювання розмірів і кольорів.
+          </p>
+          <p class="slide__lead js-reveal">
+            <strong>Figma MCP</strong> дає агенту доступ до структури файлу: компоненти, токени, відступи.
+            Код виходить набагато ближчим до дизайну, ніж генерація «на око».
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Enterprise">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/ice%20cubes.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
+          <h2 class="slide__heading js-reveal">Enterprise-аналітика</h2>
+          <p class="slide__lead js-reveal">
+            У компанії дані розкидані по CRM, warehouse і внутрішніх API. Менеджер запитує в чаті:
+            «Скільки угод закрили минулого кварталу?» — без SQL і без пʼяти вкладок.
+          </p>
+          <p class="slide__lead js-reveal">
+            MCP-сервери підключають системи до корпоративного асистента. IT контролює доступ на рівні
+            серверів — без переписування інтеграцій під кожен новий AI-інструмент.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Підключення в Cursor">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Практичні сценарії</p>
+          <h2 class="slide__heading js-reveal">Спробувати в Cursor</h2>
+          <p class="slide__lead js-reveal">
+            Щоб підключити MCP-сервер, додайте його в налаштування Cursor — наприклад, Notion MCP
+            через поле <strong>mcpServers</strong> у конфігурації.
+          </p>
+          <p class="slide__lead js-reveal">
+            Після збереження агент отримує tools для пошуку, читання та створення сторінок у Notion.
+            GitLab, Figma та інші сервери підключаються за тим самим принципом.
+          </p>
+        </div>
+      </section>
+
+      <!-- Final -->
+      <section class="slide" aria-label="Підсумки">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/ice%20cubes.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Фінал заняття</p>
+          <h2 class="slide__heading js-reveal">Підсумки</h2>
+          <p class="slide__lead js-reveal">
+            Без <strong>MCP</strong> кожен AI-агент потребує окремих інтеграцій із зовнішніми сервісами — це дорого,
+            складно підтримувати і не масштабується.
+          </p>
+          <p class="slide__lead js-reveal">
+            <strong>MCP</strong> вирішує це через один сервер: інтеграція один раз, а підключитися може
+            будь-який агент. Чим більше серверів і агентів — тим сильніший мережевий ефект.
+          </p>
+          <p class="slide__lead js-reveal">
+            У наступних лекціях розберемо, що таке MCP, його архітектуру та як побудувати власний MCP-сервер.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <nav class="nav" aria-label="Навігація по слайдах">
+      <button type="button" class="nav__btn" id="prev" aria-label="Попередній слайд">←</button>
+      <div class="nav__dots" id="dots" role="tablist" aria-label="Слайди"></div>
+      <button type="button" class="nav__btn" id="next" aria-label="Наступний слайд">→</button>
+    </nav>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

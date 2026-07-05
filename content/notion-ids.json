@@ -1,0 +1,17 @@
+{
+  "course": "39330ef3-8f26-8040-94ed-f81e14e7ee78",
+  "plan": "39330ef38f268033be70c11b57f62810",
+  "lectures": {
+    "1": {
+      "title": "Введення в MCP",
+      "page": "39430ef38f26806eaa2df05ef2b88c9a",
+      "konspekt": "39430ef38f26806d92c0c22aef77b872",
+      "quiz": "39430ef38f2680d6b8eac2b484878db7",
+      "video": "39430ef38f26803da1e8c398a066c346"
+    }
+  },
+  "references": {
+    "konspektExample": "27230ef38f2681a48d9ef52c3a3d828f",
+    "konspektRequirements": "710d48c848384cbb8aa9a428d0f28226"
+  }
+}
