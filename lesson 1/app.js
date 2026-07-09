@@ -24,15 +24,201 @@
   function getDiagramSteps(index) {
     const slide = slides[index];
     if (!slide) return [];
-    return slide.querySelectorAll(".mcp-flow__step");
+    const agentFlow = slide.querySelector(".evo-flow--agent");
+    if (agentFlow) {
+      return Array.from(agentFlow.querySelectorAll("[data-reveal-step]")).sort(
+        (a, b) => Number(a.dataset.revealStep) - Number(b.dataset.revealStep)
+      );
+    }
+    return slide.querySelectorAll(".mcp-flow__step, .evo-flow__step");
+  }
+
+  function getDiagramRoot(index) {
+    const slide = slides[index];
+    if (!slide) return null;
+    return slide.querySelector(".mcp-flow, .evo-flow");
+  }
+
+  function isAgentSlide(index) {
+    return !!slides[index]?.querySelector(".evo-flow--agent");
+  }
+
+  function layoutAgentBridge(index) {
+    if (!isAgentSlide(index) || window.innerWidth <= 720) return;
+
+    const slide = slides[index];
+    const board = slide.querySelector(".evo-agent-board");
+    const card = slide.querySelector(".evo-agent-llm__card");
+    const frame = slide.querySelector(".evo-agent-zone__frame");
+    const bridge = slide.querySelector(".evo-agent-bridge");
+    if (!board || !card || !frame || !bridge) return;
+
+    const boardRect = board.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const frameRect = frame.getBoundingClientRect();
+
+    const y = cardRect.top + cardRect.height / 2 - boardRect.top;
+    const x1 = cardRect.right - boardRect.left;
+    const x2 = frameRect.left - boardRect.left;
+    const width = Math.max(0, x2 - x1);
+
+    bridge.style.top = `${y}px`;
+    bridge.style.left = `${x1}px`;
+    bridge.style.width = `${width}px`;
+
+    bridge.querySelectorAll(".evo-agent-bridge-step").forEach((step) => {
+      const line = getAgentArrowPath(step);
+      if (!line || typeof line.getTotalLength !== "function") return;
+      const length = line.getTotalLength();
+      const opacity = gsap.getProperty(step, "opacity");
+      if (!opacity) {
+        gsap.set(line, { strokeDasharray: length, strokeDashoffset: length });
+      }
+    });
+  }
+
+  function getAgentArrowPath(el) {
+    if (!el.classList.contains("evo-agent-arrow") && !el.classList.contains("evo-agent-bridge-step")) {
+      return null;
+    }
+    if (el.tagName === "line" || el.tagName === "path") return el;
+    return el.querySelector("line") || el.querySelector("path");
+  }
+
+  function getAgentZoneParts(el) {
+    if (!el.classList.contains("evo-agent-zone")) return null;
+    return el.querySelectorAll(".evo-agent-zone__frame, .evo-agent-query");
   }
 
   function resetDiagramSteps(index) {
     const steps = getDiagramSteps(index);
     if (!steps.length) return;
-    gsap.set(steps, { opacity: 0, y: 16, scale: 0.96 });
+    steps.forEach((el) => {
+      const zoneParts = getAgentZoneParts(el);
+      const arrowPath = getAgentArrowPath(el);
+      if (zoneParts?.length) {
+        gsap.set(zoneParts, { opacity: 0, y: 16, scale: 0.96 });
+      } else if (arrowPath && typeof arrowPath.getTotalLength === "function") {
+        const length = arrowPath.getTotalLength();
+        gsap.set(el, { opacity: 0, visibility: "hidden" });
+        gsap.set(arrowPath, { strokeDasharray: length, strokeDashoffset: length });
+      } else {
+        gsap.set(el, { opacity: 0, y: 16, scale: 0.96 });
+      }
+    });
     diagramRevealCounts.set(index, 0);
-    slides[index]?.querySelector(".mcp-flow")?.classList.remove("mcp-flow--streaming");
+    getDiagramRoot(index)?.classList.remove("mcp-flow--streaming", "evo-flow--streaming");
+    requestAnimationFrame(() => layoutAgentBridge(index));
+  }
+
+  function revealDiagramStep(el, onComplete) {
+    const zoneParts = getAgentZoneParts(el);
+    if (zoneParts?.length) {
+      gsap.fromTo(
+        zoneParts,
+        { opacity: 0, y: 20, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.48,
+          ease: "power3.out",
+          clearProps: "transform",
+          onComplete: () => {
+            layoutAgentBridge(current);
+            onComplete?.();
+          },
+        }
+      );
+      return;
+    }
+
+    const arrowPath = getAgentArrowPath(el);
+    if (arrowPath && typeof arrowPath.getTotalLength === "function") {
+      layoutAgentBridge(current);
+      const length = arrowPath.getTotalLength();
+      gsap.set(el, { visibility: "visible" });
+      gsap.fromTo(
+        el,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.12, ease: "none" }
+      );
+      gsap.fromTo(
+        arrowPath,
+        { strokeDasharray: length, strokeDashoffset: length },
+        {
+          strokeDashoffset: 0,
+          duration: 0.55,
+          ease: "power2.out",
+          onComplete,
+        }
+      );
+      return;
+    }
+
+    gsap.fromTo(
+      el,
+      { opacity: 0, y: 20, scale: 0.96 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.48,
+        ease: "power3.out",
+        clearProps: "transform",
+        onComplete,
+      }
+    );
+  }
+
+  function hideDiagramStep(el, onComplete) {
+    const zoneParts = getAgentZoneParts(el);
+    if (zoneParts?.length) {
+      gsap.to(zoneParts, {
+        opacity: 0,
+        y: -12,
+        scale: 0.96,
+        duration: 0.24,
+        ease: "power2.in",
+        onComplete: () => {
+          gsap.set(zoneParts, { y: 16 });
+          onComplete?.();
+        },
+      });
+      return;
+    }
+
+    const arrowPath = getAgentArrowPath(el);
+    if (arrowPath && typeof arrowPath.getTotalLength === "function") {
+      const length = arrowPath.getTotalLength();
+      gsap.to(arrowPath, {
+        strokeDashoffset: length,
+        duration: 0.28,
+        ease: "power2.in",
+      });
+      gsap.to(el, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.in",
+        onComplete: () => {
+          gsap.set(el, { visibility: "hidden" });
+          onComplete?.();
+        },
+      });
+      return;
+    }
+
+    gsap.to(el, {
+      opacity: 0,
+      y: -12,
+      scale: 0.96,
+      duration: 0.24,
+      ease: "power2.in",
+      onComplete: () => {
+        gsap.set(el, { y: 16 });
+        onComplete?.();
+      },
+    });
   }
 
   function revealNextDiagramStep() {
@@ -44,23 +230,11 @@
 
     const el = steps[shown];
     diagramRevealCounts.set(current, shown + 1);
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 20, scale: 0.96 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.48,
-        ease: "power3.out",
-        clearProps: "transform",
-        onComplete: () => {
-          if (shown + 1 >= steps.length) {
-            slides[current]?.querySelector(".mcp-flow")?.classList.add("mcp-flow--streaming");
-          }
-        },
+    revealDiagramStep(el, () => {
+      if (shown + 1 >= steps.length) {
+        getDiagramRoot(current)?.classList.add("mcp-flow--streaming", "evo-flow--streaming");
       }
-    );
+    });
     return true;
   }
 
@@ -74,17 +248,8 @@
     const nextShown = shown - 1;
     const el = steps[nextShown];
     diagramRevealCounts.set(current, nextShown);
-    slides[current]?.querySelector(".mcp-flow")?.classList.remove("mcp-flow--streaming");
-    gsap.to(el, {
-      opacity: 0,
-      y: -12,
-      scale: 0.96,
-      duration: 0.24,
-      ease: "power2.in",
-      onComplete: () => {
-        gsap.set(el, { y: 16 });
-      },
-    });
+    getDiagramRoot(current)?.classList.remove("mcp-flow--streaming", "evo-flow--streaming");
+    hideDiagramStep(el);
     return true;
   }
 
@@ -309,7 +474,7 @@
       isSteps
         ? ".js-reveal:not(.content-list__item):not(.token-card)"
         : isDiagram
-          ? ".js-reveal:not(.content-list__item):not(.mcp-flow__step)"
+          ? ".js-reveal:not(.content-list__item):not(.mcp-flow__step):not(.evo-flow__step)"
           : ".js-reveal:not(.content-list__item)"
     );
     gsap.fromTo(
@@ -369,7 +534,7 @@
           const revealSelector = isStepsIncoming
             ? ".js-reveal:not(.content-list__item):not(.token-card)"
             : isDiagramIncoming
-              ? ".js-reveal:not(.content-list__item):not(.mcp-flow__step)"
+              ? ".js-reveal:not(.content-list__item):not(.mcp-flow__step):not(.evo-flow__step)"
               : ".js-reveal:not(.content-list__item)";
 
           gsap.set(incoming.querySelectorAll(revealSelector), { opacity: 0, y: 24 });
@@ -384,6 +549,7 @@
         }
 
         animateSlideIn(current, () => {
+          layoutAgentBridge(current);
           isAnimating = false;
         });
       },
@@ -440,6 +606,8 @@
     },
     { capture: true }
   );
+
+  window.addEventListener("resize", () => layoutAgentBridge(current));
 
   buildDots();
   playVideosForSlide(0);
