@@ -23,6 +23,14 @@
       "konspekt": "39630ef38f26813ab5d6c81e7f185596",
       "quiz": "39630ef38f268199b5e6f37e868b2118",
       "video": "39630ef38f26815ea403c76e615f736c"
+    },
+    "4": {
+      "title": "Transport layer — stdio і Streamable HTTP",
+      "module": "39630ef38f268125a22bc9162af0214b",
+      "page": "39830ef38f268151b475c191f642139f",
+      "konspekt": "39830ef38f268151ad5feef008a75f77",
+      "quiz": "39830ef38f2681179a2ac2f192d069da",
+      "video": "39830ef38f2681c4a93ad8776035a824"
     }
   },
   "references": {
