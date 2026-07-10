@@ -82,13 +82,13 @@
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">06</span>
-              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="32" height="32" />
-              <span class="plan-list__text">Три transport в одному коді</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Deprecated: HTTP+SSE</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">07</span>
-              <img class="plan-list__icon" src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg" alt="" width="32" height="32" />
-              <span class="plan-list__text">Deprecated: HTTP+SSE</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Три transport в одному коді</span>
             </li>
           </ol>
         </div>
@@ -114,28 +114,7 @@
         </div>
       </section>
 
-      <section class="slide" aria-label="Client-Server Architecture">
-        <video class="slide__video" autoplay muted loop playsinline preload="auto">
-          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
-        </video>
-        <div class="slide__scrim"></div>
-        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
-          <p class="slide__eyebrow js-reveal">Вступ</p>
-          <h2 class="slide__heading js-reveal">Client-Server Architecture</h2>
-          <p class="slide__lead js-reveal">
-            <strong>MCP Client</strong> і <strong>MCP Server</strong> обмінюються інформацією про використання tools.
-            Користувач спілкується з Host природною мовою — Host через Client надсилає структуровані запити.
-          </p>
-          <ul class="content-list">
-            <li class="content-list__item js-reveal"><strong>User</strong> — запит природною мовою</li>
-            <li class="content-list__item js-reveal"><strong>MCP Client / Host</strong> — Cursor, Claude Desktop</li>
-            <li class="content-list__item js-reveal"><strong>MCP Server</strong> — tools, resources, prompts</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="slide slide--diagram diagram-slide" aria-label="Процес обміну JSON-RPC">
+      <section class="slide slide--diagram diagram-slide" aria-label="Client-Server Architecture">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
         </video>
@@ -143,30 +122,27 @@
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
         <div class="slide__inner slide__inner--content slide__inner--diagram slide__inner--seq-diagram">
           <p class="slide__eyebrow js-reveal">Вступ</p>
-          <h2 class="slide__heading js-reveal">Процес обміну (4 кроки)</h2>
+          <h2 class="slide__heading js-reveal">Client-Server Architecture</h2>
           <div
-            class="mcp-seq-flow js-reveal"
+            class="mcp-seq-flow mcp-seq-flow--three-col js-reveal"
             role="img"
-            aria-label="User, Client/Host, MCP Server — чотири кроки з JSON-RPC"
+            aria-label="User, MCP Client/Host, MCP Server — чотири кроки з JSON-RPC"
           >
             <div class="mcp-seq-flow__canvas">
               <div class="mcp-seq-flow__participants mcp-seq-flow__step">
-                <div class="mcp-seq-flow__participant">
+                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--user">
                   <span class="mcp-seq-flow__participant-name">User</span>
                 </div>
-                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--app">
-                  <span class="mcp-seq-flow__participant-name">Client/Host</span>
+                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--client">
+                  <span class="mcp-seq-flow__participant-name">MCP Client/Host</span>
                 </div>
-                <div class="mcp-seq-flow__participant" aria-hidden="true">
-                  <span class="mcp-seq-flow__participant-name">&nbsp;</span>
-                </div>
-                <div class="mcp-seq-flow__participant">
+                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--server">
                   <span class="mcp-seq-flow__participant-name">MCP Server</span>
                 </div>
               </div>
 
               <div class="mcp-seq-flow__lifelines mcp-seq-flow__step" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span>
               </div>
 
               <div class="mcp-seq-flow__stage">
@@ -177,36 +153,33 @@
                   </div>
                 </div>
                 <div class="mcp-seq-flow__row mcp-seq-flow__step">
-                  <div class="mcp-seq-flow__track mcp-seq-flow__track--c2-4">
-                    <span class="mcp-seq-flow__label">2. JSON-RPC Request (tools/call)</span>
+                  <div class="mcp-seq-flow__track mcp-seq-flow__track--c2-3">
+                    <span class="mcp-seq-flow__label">2. JSON-RPC Request (method: get_weather, params: {city: "Paris"}, id: 1)</span>
                     <span class="mcp-seq-flow__line"><span class="mcp-seq-flow__dot"></span></span>
                   </div>
                 </div>
                 <div class="mcp-seq-flow__row mcp-seq-flow__step">
-                  <div class="mcp-seq-flow__track mcp-seq-flow__track--c2-4 mcp-seq-flow__track--reverse">
-                    <span class="mcp-seq-flow__label">3. JSON-RPC Response (result: 20)</span>
-                    <span class="mcp-seq-flow__line"><span class="mcp-seq-flow__dot mcp-seq-flow__dot--reverse"></span></span>
+                  <div class="mcp-seq-flow__track mcp-seq-flow__track--c2-3 mcp-seq-flow__track--reverse">
+                    <span class="mcp-seq-flow__label">3. JSON-RPC Response (result: 20, id: 1)</span>
+                    <span class="mcp-seq-flow__line mcp-seq-flow__line--dashed"><span class="mcp-seq-flow__dot mcp-seq-flow__dot--reverse"></span></span>
                   </div>
                 </div>
                 <div class="mcp-seq-flow__row mcp-seq-flow__step">
                   <div class="mcp-seq-flow__track mcp-seq-flow__track--c1-2 mcp-seq-flow__track--reverse">
-                    <span class="mcp-seq-flow__label">4. «Температура в Парижі — 20°C»</span>
-                    <span class="mcp-seq-flow__line"><span class="mcp-seq-flow__dot mcp-seq-flow__dot--reverse"></span></span>
+                    <span class="mcp-seq-flow__label">4. «Температура в Парижі — 20°C.»</span>
+                    <span class="mcp-seq-flow__line mcp-seq-flow__line--dashed"><span class="mcp-seq-flow__dot mcp-seq-flow__dot--reverse"></span></span>
                   </div>
                 </div>
               </div>
 
               <div class="mcp-seq-flow__participants mcp-seq-flow__participants--bottom">
-                <div class="mcp-seq-flow__participant">
+                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--user">
                   <span class="mcp-seq-flow__participant-name">User</span>
                 </div>
-                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--app">
-                  <span class="mcp-seq-flow__participant-name">Client/Host</span>
+                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--client">
+                  <span class="mcp-seq-flow__participant-name">MCP Client/Host</span>
                 </div>
-                <div class="mcp-seq-flow__participant" aria-hidden="true">
-                  <span class="mcp-seq-flow__participant-name">&nbsp;</span>
-                </div>
-                <div class="mcp-seq-flow__participant">
+                <div class="mcp-seq-flow__participant mcp-seq-flow__participant--server">
                   <span class="mcp-seq-flow__participant-name">MCP Server</span>
                 </div>
               </div>
@@ -252,9 +225,6 @@
         <div class="slide__inner slide__inner--content">
           <p class="slide__eyebrow js-reveal">Вступ</p>
           <h2 class="slide__heading js-reveal">JSON-RPC Response</h2>
-          <p class="slide__lead js-reveal">
-            <strong>Response</strong> (server → client): результат виконання tool з тим самим <code>id</code>.
-          </p>
           <div class="token-card js-reveal">
             <pre class="slide__code"><code>{
   "jsonrpc": "2.0",
@@ -262,10 +232,6 @@
   "id": 1
 }</code></pre>
           </div>
-          <p class="slide__lead js-reveal">
-            Transport визначає, <em>як</em> ці повідомлення подорожують — через <strong>stdio</strong> або <strong>HTTP</strong>.
-            Формат завжди JSON-RPC.
-          </p>
         </div>
       </section>
 
@@ -279,16 +245,18 @@
           <p class="slide__eyebrow js-reveal">Вступ</p>
           <h2 class="slide__heading js-reveal">Що таке Transport layer</h2>
           <p class="slide__lead js-reveal">
-            <strong>MCP Protocol</strong> визначає <em>що</em> передається. <strong>Transport layer</strong> — <em>як</em>
-            JSON-RPC доходить між Client і Server.
+            <strong>Transport layer</strong> — рівень MCP, який відповідає за <strong>фізичну доставку</strong> JSON-RPC
+            повідомлень між Client і Server. Протокол визначає <em>що</em> передається; transport — <em>як</em> воно
+            доходить від однієї програми до іншої: через який канал, на якій машині, за яким механізмом.
+          </p>
+          <p class="slide__lead js-reveal">
+            Аналогія: JSON-RPC — текст листа, transport — спосіб доставки. Той самий лист можна передати кур'єром
+            по кімнаті або поштою через інтернет.
           </p>
           <ul class="content-list">
-            <li class="content-list__item js-reveal"><strong>stdio</strong> — stdin/stdout, локальний subprocess</li>
-            <li class="content-list__item js-reveal"><strong>Streamable HTTP</strong> — POST + GET, опційно SSE</li>
+            <li class="content-list__item js-reveal"><strong>stdio</strong> — локально на одному ПК через stdin/stdout</li>
+            <li class="content-list__item js-reveal"><strong>Streamable HTTP</strong> — по мережі через HTTP (POST + GET)</li>
           </ul>
-          <p class="slide__lead js-reveal">
-            Протокол transport-agnostic: lifecycle однаковий — змінюється лише канал доставки.
-          </p>
         </div>
       </section>
 
@@ -322,7 +290,7 @@
           <p class="slide__eyebrow js-reveal">Локальний stdio</p>
           <h2 class="slide__heading js-reveal">Як це працює</h2>
           <div
-            class="mcp-flow mcp-flow--four-col js-reveal"
+            class="mcp-flow mcp-flow--four-col mcp-flow--equal-nodes js-reveal"
             role="img"
             aria-label="User, Host і local MCP server всередині LOCAL MACHINE через stdio"
           >
@@ -368,8 +336,8 @@
                     class="mcp-flow__hub-icon"
                     src="../video%20and%20pcitures/icons/w/python.svg"
                     alt=""
-                    width="36"
-                    height="36"
+                    width="32"
+                    height="32"
                   />
                   <span class="mcp-flow__hub-title">local MCP server</span>
                   <span class="mcp-flow__hub-sub">subprocess · stdin/stdout</span>
@@ -412,12 +380,15 @@
         <div class="slide__inner slide__inner--content">
           <p class="slide__eyebrow js-reveal">Локальний stdio</p>
           <h2 class="slide__heading js-reveal">Що таке stdio</h2>
-          <ul class="content-list">
-            <li class="content-list__item js-reveal">Client запускає Server як <strong>subprocess</strong></li>
-            <li class="content-list__item js-reveal">JSON-RPC з <strong>stdin</strong> → відповіді в <strong>stdout</strong></li>
-            <li class="content-list__item js-reveal">Один JSON на рядок, без вбудованих переносів</li>
-            <li class="content-list__item js-reveal"><strong>stderr</strong> — лише для логів</li>
-          </ul>
+          <p class="slide__lead js-reveal">
+            <strong>stdio</strong> = <em>standard input / standard output</em>. Це <strong>не мережевий протокол</strong> —
+            стандартні потоки ОС у кожного процесу: <strong>stdin</strong> (вхід), <strong>stdout</strong> (вихід),
+            <strong>stderr</strong> (логи).
+          </p>
+          <p class="slide__lead js-reveal">
+            Це <strong>байтові труби</strong> в пам'яті між двома програмами на одному ПК — без TCP, без IP, без HTTP.
+            Усередині просто текст JSON, по одному повідомленню на рядок.
+          </p>
         </div>
       </section>
 
@@ -445,21 +416,108 @@
         </div>
       </section>
 
-      <section class="slide" aria-label="Один Client — один subprocess">
+      <section class="slide slide--diagram" aria-label="Один Client — один subprocess">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
         </video>
-        <div class="slide__scrim"></div>
+        <div class="slide__scrim slide__scrim--plan"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--diagram">
           <p class="slide__eyebrow js-reveal">Локальний stdio</p>
           <h2 class="slide__heading js-reveal">Один Client — один subprocess</h2>
           <p class="slide__lead js-reveal">
-            Cursor і Claude Desktop з одним сервером у конфігу → <strong>два окремі subprocess</strong>, не один спільний процес.
+            Host <strong>запускає програму</strong> як дочірній процес — наче <code>node server.js</code> у терміналі.
           </p>
+
+          <div class="subprocess-tree js-reveal" role="img" aria-label="Host spawn три окремі процеси серверів">
+            <div class="subprocess-tree__host">
+              <span class="subprocess-tree__host-name">Claude Desktop</span>
+              <span class="subprocess-tree__host-hint">Host</span>
+            </div>
+            <ul class="subprocess-tree__spawns">
+              <li class="subprocess-tree__spawn">
+                <code>spawn("node filesystem-server.js")</code>
+                <span class="subprocess-tree__arrow" aria-hidden="true">→</span>
+                <span class="subprocess-tree__proc">Process #1</span>
+              </li>
+              <li class="subprocess-tree__spawn">
+                <code>spawn("python git-server.py")</code>
+                <span class="subprocess-tree__arrow" aria-hidden="true">→</span>
+                <span class="subprocess-tree__proc">Process #2</span>
+              </li>
+              <li class="subprocess-tree__spawn">
+                <code>spawn("node database-server.js")</code>
+                <span class="subprocess-tree__arrow" aria-hidden="true">→</span>
+                <span class="subprocess-tree__proc">Process #3</span>
+              </li>
+            </ul>
+            <p class="subprocess-tree__note">Кожен сервер у конфігу — окремий процес у Task Manager / Activity Monitor</p>
+          </div>
+
+          <p class="slide__section-label js-reveal">Приклади</p>
+          <ul class="content-list content-list--compact content-list--examples">
+            <li class="content-list__item js-reveal">
+              <strong>1 Host, 5 серверів у конфігу</strong>
+              <span class="content-list__item-sub">→ 5 окремих subprocess</span>
+            </li>
+            <li class="content-list__item js-reveal">
+              <strong>Cursor і Claude Desktop</strong>
+              <span class="content-list__item-sub">→ 2 subprocess, той самий <code>server.js</code></span>
+              <span class="content-list__item-sub">Своя пам'ять і stdin/stdout — стан не спільний</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide slide--diagram" aria-label="Чому stdio не масштабується">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim slide__scrim--plan"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--diagram">
+          <p class="slide__eyebrow js-reveal">Локальний stdio</p>
+          <h2 class="slide__heading js-reveal">Чому stdio не масштабується</h2>
           <p class="slide__lead js-reveal">
-            <strong>stdio не масштабується</strong> на «один сервер — багато клієнтів». Кожне з'єднання Client↔Server — свій екземпляр процесу.
+            Один спільний сервер на всю команду через stdio — <strong>не працює</strong>.
           </p>
+
+          <div class="subprocess-split js-reveal" role="img" aria-label="Cursor і Claude Desktop запускають два окремі процеси одного сервера">
+            <div class="subprocess-split__row">
+              <span class="subprocess-split__host">Cursor</span>
+              <code>spawn("node server.js")</code>
+              <span class="subprocess-split__arrow" aria-hidden="true">→</span>
+              <span class="subprocess-split__proc">Process #1</span>
+            </div>
+            <div class="subprocess-split__row">
+              <span class="subprocess-split__host">Claude Desktop</span>
+              <code>spawn("node server.js")</code>
+              <span class="subprocess-split__arrow" aria-hidden="true">→</span>
+              <span class="subprocess-split__proc">Process #2</span>
+            </div>
+            <p class="subprocess-split__note">Два запуски одного файлу — процеси не знають один про одного</p>
+          </div>
+
+          <div class="grid-2 grid-2--equal js-reveal">
+            <div class="content-card content-card--ok">
+              <p class="content-card__title">Streamable HTTP</p>
+              <p class="content-card__text">1 сервер слухає порт</p>
+              <p class="content-card__text">100 клієнтів підключаються → <strong>працює</strong></p>
+            </div>
+            <div class="content-card content-card--warn">
+              <p class="content-card__title">stdio</p>
+              <p class="content-card__text">100 клієнтів → 100 процесів</p>
+              <p class="content-card__text">кожен <strong>spawn()</strong> → <strong>неефективно</strong></p>
+            </div>
+          </div>
+
+          <p class="slide__section-label slide__section-label--warn js-reveal">Обмеження</p>
+          <ul class="content-list content-list--compact content-list--full">
+            <li class="content-list__item content-list__item--warning js-reveal">
+              <strong>stdio</strong> — лише для desktop і локальної роботи
+              <span class="content-list__item-sub">Для спільного командного сервера — <strong>Streamable HTTP</strong></span>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -513,18 +571,37 @@ if __name__ == "__main__":
           <p class="slide__eyebrow js-reveal">Streamable HTTP</p>
           <h2 class="slide__heading js-reveal">Як це працює</h2>
           <div
-            class="mcp-flow js-reveal"
+            class="mcp-flow mcp-flow--four-col mcp-flow--equal-nodes js-reveal"
             role="img"
-            aria-label="LOCAL MACHINE Host підключається до remote MCP server через Streamable HTTP"
+            aria-label="User і Host у LOCAL MACHINE, remote MCP server у Cloud через Streamable HTTP"
           >
             <div class="mcp-flow__lane">
               <div class="mcp-flow__agents mcp-flow__step">
                 <div class="mcp-flow__node mcp-flow__node--agent">
-                  <span class="mcp-flow__badge">LOCAL</span>
-                  <span class="mcp-flow__label">Host / Client</span>
-                  <span class="mcp-flow__hint">Cursor · Claude Desktop</span>
+                  <span class="mcp-flow__badge">User</span>
+                  <span class="mcp-flow__label">Користувач</span>
+                  <span class="mcp-flow__hint">природна мова</span>
                 </div>
-                <p class="mcp-flow__note">Користувач на локальній машині</p>
+                <p class="mcp-flow__note">User ↔ Host — всередині LOCAL MACHINE</p>
+              </div>
+
+              <div class="mcp-flow__client-group mcp-flow__step">
+                <div class="mcp-flow__pipe mcp-flow__pipe--left" aria-hidden="true">
+                  <span class="mcp-flow__line"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--a"></span>
+                  <span class="mcp-flow__dot mcp-flow__dot--b"></span>
+                </div>
+                <div class="mcp-flow__node mcp-flow__node--client">
+                  <img
+                    class="mcp-flow__hub-icon"
+                    src="../video%20and%20pcitures/icons/w/chatgpt.svg"
+                    alt=""
+                    width="32"
+                    height="32"
+                  />
+                  <span class="mcp-flow__label">Host / Client</span>
+                  <span class="mcp-flow__hint">LOCAL MACHINE</span>
+                </div>
               </div>
 
               <div class="mcp-flow__hub-group mcp-flow__step">
@@ -537,15 +614,16 @@ if __name__ == "__main__":
                 </div>
                 <div class="mcp-flow__hub">
                   <span class="mcp-flow__hub-ring" aria-hidden="true"></span>
+                  <span class="mcp-flow__hub-tag">Cloud</span>
                   <img
                     class="mcp-flow__hub-icon"
                     src="../video%20and%20pcitures/icons/w/docker.svg"
                     alt=""
-                    width="36"
-                    height="36"
+                    width="32"
+                    height="32"
                   />
                   <span class="mcp-flow__hub-title">remote MCP server</span>
-                  <span class="mcp-flow__hub-sub">Cloud · один процес</span>
+                  <span class="mcp-flow__hub-sub">один процес · AWS / GCP</span>
                 </div>
               </div>
 
@@ -553,7 +631,6 @@ if __name__ == "__main__":
                 <div class="mcp-flow__pipe mcp-flow__pipe--left" aria-hidden="true">
                   <span class="mcp-flow__line"></span>
                   <span class="mcp-flow__dot mcp-flow__dot--a"></span>
-                  <span class="mcp-flow__dot mcp-flow__dot--b"></span>
                 </div>
                 <div class="mcp-flow__services-wrap">
                   <p class="mcp-flow__services-title">Масштабування</p>
@@ -571,27 +648,9 @@ if __name__ == "__main__":
               </div>
             </div>
             <p class="mcp-flow__caption mcp-flow__step">
-              Один remote-сервер можуть використовувати <strong>тисячі клієнтів</strong> — кожен по HTTP, не subprocess
+              Host (Client) ↔ remote server у <strong>Cloud</strong> — один процес обслуговує <strong>тисячі клієнтів</strong> по HTTP, без subprocess
             </p>
           </div>
-        </div>
-      </section>
-
-      <section class="slide" aria-label="Streamable HTTP деталі">
-        <video class="slide__video" autoplay muted loop playsinline preload="auto">
-          <source src="../video%20and%20pcitures/Video/ice%20cubes.mp4" type="video/mp4" />
-        </video>
-        <div class="slide__scrim"></div>
-        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
-          <p class="slide__eyebrow js-reveal">Streamable HTTP</p>
-          <h2 class="slide__heading js-reveal">Що таке Streamable HTTP</h2>
-          <ul class="content-list">
-            <li class="content-list__item js-reveal">Один endpoint: <strong>POST</strong> + <strong>GET</strong></li>
-            <li class="content-list__item js-reveal">Кожен JSON-RPC — окремий HTTP POST</li>
-            <li class="content-list__item js-reveal">SSE-стрім для server → client notifications</li>
-            <li class="content-list__item js-reveal">Сесії через <code>Mcp-Session-Id</code></li>
-          </ul>
         </div>
       </section>
 
@@ -688,65 +747,61 @@ if __name__ == "__main__":
           <p class="slide__eyebrow js-reveal">Аутентифікація</p>
           <h2 class="slide__heading js-reveal">Як це працює</h2>
           <div
-            class="mcp-flow mcp-flow--four-col js-reveal"
+            class="mcp-flow mcp-flow--auth js-reveal"
             role="img"
-            aria-label="LOCAL proxy через stdio, remote MCP з Auth0 у хмарі"
+            aria-label="User, Claude Desktop, Remote MCP з Auth0, App API"
           >
-            <div class="mcp-flow__lane">
-              <div class="mcp-flow__agents mcp-flow__step">
-                <div class="mcp-flow__node mcp-flow__node--agent">
-                  <span class="mcp-flow__badge">LOCAL</span>
-                  <span class="mcp-flow__label">Host</span>
-                  <span class="mcp-flow__hint">Claude Desktop</span>
+            <div class="mcp-auth-flow">
+              <div class="mcp-auth-flow__track">
+                <div class="mcp-auth-flow__block mcp-auth-flow__block--user mcp-flow__step">
+                  <span class="mcp-flow__badge">User</span>
+                  <span class="mcp-flow__label">User</span>
                 </div>
-                <p class="mcp-flow__note">User → Host</p>
-              </div>
 
-              <div class="mcp-flow__client-group mcp-flow__step">
-                <div class="mcp-flow__pipe mcp-flow__pipe--left" aria-hidden="true">
-                  <span class="mcp-flow__line"></span>
-                  <span class="mcp-flow__transport-label">stdio</span>
-                  <span class="mcp-flow__dot mcp-flow__dot--a"></span>
+                <div class="mcp-auth-flow__arrow mcp-flow__step" aria-hidden="true">
+                  <span class="mcp-auth-flow__arrow-line">↔</span>
                 </div>
-                <div class="mcp-flow__node mcp-flow__node--client">
-                  <span class="mcp-flow__label">remote-mcp</span>
-                  <span class="mcp-flow__hint">proxy</span>
-                </div>
-              </div>
 
-              <div class="mcp-flow__hub-group mcp-flow__step">
-                <div class="mcp-flow__pipe mcp-flow__pipe--left" aria-hidden="true">
-                  <span class="mcp-flow__line"></span>
-                  <span class="mcp-flow__transport-label">HTTP + Bearer</span>
-                  <span class="mcp-flow__dot mcp-flow__dot--a"></span>
-                  <span class="mcp-flow__dot mcp-flow__dot--b"></span>
+                <div class="mcp-auth-flow__block mcp-flow__step">
+                  <img
+                    class="mcp-auth-flow__icon"
+                    src="../video%20and%20pcitures/icons/claude-color.png"
+                    alt=""
+                    width="44"
+                    height="44"
+                  />
+                  <span class="mcp-flow__label">Claude Desktop</span>
                 </div>
-                <div class="mcp-flow__hub">
-                  <span class="mcp-flow__hub-ring" aria-hidden="true"></span>
-                  <span class="mcp-flow__hub-tag">Cloud</span>
-                  <span class="mcp-flow__hub-title">Remote MCP</span>
-                  <span class="mcp-flow__hub-sub">↔ Auth0</span>
-                </div>
-              </div>
 
-              <div class="mcp-flow__services-group mcp-flow__step">
-                <div class="mcp-flow__pipe mcp-flow__pipe--left" aria-hidden="true">
-                  <span class="mcp-flow__line"></span>
-                  <span class="mcp-flow__dot mcp-flow__dot--a"></span>
+                <div class="mcp-auth-flow__arrow mcp-auth-flow__arrow--labeled mcp-flow__step" aria-hidden="true">
+                  <span class="mcp-auth-flow__transport">HTTP + Bearer</span>
+                  <span class="mcp-auth-flow__arrow-line">→</span>
                 </div>
-                <div class="mcp-flow__services-wrap">
-                  <p class="mcp-flow__services-title">Зовнішній API</p>
-                  <div class="mcp-flow__services">
-                    <div class="mcp-flow__node mcp-flow__node--service">
-                      <span class="mcp-flow__service-icon">API</span>
-                      <span class="mcp-flow__label">TODOS API</span>
-                    </div>
-                  </div>
+
+                <div class="mcp-auth-flow__block mcp-auth-flow__block--server mcp-flow__step">
+                  <span class="mcp-flow__label">Remote MCP</span>
+                </div>
+
+                <div class="mcp-auth-flow__arrow mcp-auth-flow__arrow--vertical mcp-flow__step" aria-hidden="true">
+                  <span class="mcp-auth-flow__arrow-line">↕</span>
+                </div>
+
+                <div class="mcp-auth-flow__auth mcp-flow__step">
+                  <span class="mcp-auth-flow__auth-eyebrow">Authentication</span>
+                  <span class="mcp-auth-flow__auth-label">Auth0</span>
+                </div>
+
+                <div class="mcp-auth-flow__arrow mcp-flow__step" aria-hidden="true">
+                  <span class="mcp-auth-flow__arrow-line">↔</span>
+                </div>
+
+                <div class="mcp-auth-flow__block mcp-auth-flow__block--server mcp-flow__step">
+                  <span class="mcp-flow__label">App API</span>
                 </div>
               </div>
             </div>
             <p class="mcp-flow__caption mcp-flow__step">
-              <strong>Proxy</strong> спілкується з Host через stdio, з remote — по HTTP з токеном <strong>Authorization: Bearer</strong>
+              Claude Desktop з'єднується з <strong>Remote MCP</strong> по HTTP з токеном <strong>Authorization: Bearer</strong>, <strong>Auth0</strong> — OAuth
             </p>
           </div>
         </div>
@@ -797,41 +852,91 @@ if __name__ == "__main__":
         </div>
       </section>
 
-      <section class="slide" aria-label="Переваги stdio">
+      <section class="slide slide--compare" aria-label="Переваги stdio">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--compare">
           <p class="slide__eyebrow js-reveal">Порівняння</p>
           <h2 class="slide__heading js-reveal">stdio</h2>
-          <ul class="content-list">
-            <li class="content-list__item js-reveal">✓ Простота — без мережі, портів, TLS</li>
-            <li class="content-list__item js-reveal">✓ Ідеально для desktop Host</li>
-            <li class="content-list__item js-reveal">✓ Client керує життєвим циклом процесу</li>
-            <li class="content-list__item js-reveal">✗ Один subprocess на одне з'єднання</li>
-            <li class="content-list__item js-reveal">✗ Не підходить для спільного командного сервера</li>
-          </ul>
+          <div class="compare-table-wrap js-reveal">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="compare-table__th compare-table__th--mark"></th>
+                  <th scope="col" class="compare-table__th">Характеристика</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark">✓</td>
+                  <td>Простота — без мережі, портів, TLS</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark">✓</td>
+                  <td>Ідеально для desktop Host</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark">✓</td>
+                  <td>Client керує життєвим циклом процесу</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--con">
+                  <td class="compare-table__mark">✗</td>
+                  <td>Один subprocess на одне з'єднання</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--con">
+                  <td class="compare-table__mark">✗</td>
+                  <td>Не підходить для спільного командного сервера</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <section class="slide" aria-label="Переваги HTTP">
+      <section class="slide slide--compare" aria-label="Переваги HTTP">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
         </video>
         <div class="slide__scrim"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
+        <div class="slide__inner slide__inner--content slide__inner--compare">
           <p class="slide__eyebrow js-reveal">Порівняння</p>
           <h2 class="slide__heading js-reveal">Streamable HTTP</h2>
-          <ul class="content-list">
-            <li class="content-list__item js-reveal">✓ Один процес — багато клієнтів</li>
-            <li class="content-list__item js-reveal">✓ Деплой у хмару, Docker, Kubernetes</li>
-            <li class="content-list__item js-reveal">✓ SSE, сесії, resumability</li>
-            <li class="content-list__item js-reveal">✗ Складніша інфраструктура</li>
-            <li class="content-list__item js-reveal">✗ Auth обов'язковий у production</li>
-          </ul>
+          <div class="compare-table-wrap js-reveal">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="compare-table__th compare-table__th--mark"></th>
+                  <th scope="col" class="compare-table__th">Характеристика</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark">✓</td>
+                  <td>Один процес — багато клієнтів</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark">✓</td>
+                  <td>Деплой у хмару, Docker, Kubernetes</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark">✓</td>
+                  <td>Сесії через <code>Mcp-Session-Id</code></td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--con">
+                  <td class="compare-table__mark">✗</td>
+                  <td>Складніша інфраструктура</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--con">
+                  <td class="compare-table__mark">✗</td>
+                  <td>Auth обов'язковий у production</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -853,8 +958,8 @@ if __name__ == "__main__":
         </div>
       </section>
 
-      <!-- Block 6: Three transports -->
-      <section class="slide slide--block-intro" aria-label="Блок 6 — Три transport">
+      <!-- Block 6: Deprecated -->
+      <section class="slide slide--block-intro" aria-label="Блок 6 — Deprecated SSE">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
         </video>
@@ -868,6 +973,47 @@ if __name__ == "__main__":
         />
         <div class="slide__inner slide__inner--title">
           <p class="slide__eyebrow js-reveal">Блок 6</p>
+          <h2 class="slide__title js-reveal">Deprecated HTTP+SSE</h2>
+          <p class="slide__subtitle js-reveal">Legacy transport</p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Legacy vs новий transport">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Deprecated</p>
+          <h2 class="slide__heading js-reveal">HTTP+SSE → Streamable HTTP</h2>
+          <p class="slide__lead js-reveal">
+            <strong>Було (2024-11-05):</strong> два endpoint — SSE + POST, подія <code>endpoint</code> при GET.
+          </p>
+          <p class="slide__lead js-reveal">
+            <strong>Зараз (2025-06-18):</strong> один endpoint POST+GET, сесії через <code>Mcp-Session-Id</code>.
+          </p>
+          <p class="slide__lead js-reveal">
+            Нові проєкти — <code>transport="streamable-http"</code>. <code>transport="sse"</code> — legacy.
+          </p>
+        </div>
+      </section>
+
+      <!-- Block 7: Three transports -->
+      <section class="slide slide--block-intro" aria-label="Блок 7 — Три transport">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow" aria-hidden="true"></div>
+        <img
+          class="slide__watermark"
+          src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="slide__inner slide__inner--title">
+          <p class="slide__eyebrow js-reveal">Блок 7</p>
           <h2 class="slide__title js-reveal">Три transport в коді</h2>
           <p class="slide__subtitle js-reveal">Один параметр — різний канал</p>
         </div>
@@ -887,53 +1033,9 @@ if __name__ == "__main__":
 mcp.run()
 
 # Streamable HTTP
-mcp.run(transport="streamable-http", host="127.0.0.1", port=8000)
-
-# SSE (legacy)
-mcp.run(transport="sse", host="127.0.0.1", port=8000)</code></pre>
+mcp.run(transport="streamable-http", host="127.0.0.1", port=8000)</code></pre>
           </div>
           <p class="slide__lead js-reveal">Логіка tools/resources/prompts не змінюється — лише transport layer.</p>
-        </div>
-      </section>
-
-      <!-- Block 7: Deprecated -->
-      <section class="slide slide--block-intro" aria-label="Блок 7 — Deprecated SSE">
-        <video class="slide__video" autoplay muted loop playsinline preload="auto">
-          <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
-        </video>
-        <div class="slide__scrim"></div>
-        <div class="slide__glow" aria-hidden="true"></div>
-        <img
-          class="slide__watermark"
-          src="../video%20and%20pcitures/Hillel%20MAX%20Logo/symbol.svg"
-          alt=""
-          aria-hidden="true"
-        />
-        <div class="slide__inner slide__inner--title">
-          <p class="slide__eyebrow js-reveal">Блок 7</p>
-          <h2 class="slide__title js-reveal">Deprecated HTTP+SSE</h2>
-          <p class="slide__subtitle js-reveal">Legacy transport</p>
-        </div>
-      </section>
-
-      <section class="slide" aria-label="Legacy vs новий transport">
-        <video class="slide__video" autoplay muted loop playsinline preload="auto">
-          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
-        </video>
-        <div class="slide__scrim"></div>
-        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
-        <div class="slide__inner slide__inner--content">
-          <p class="slide__eyebrow js-reveal">Deprecated</p>
-          <h2 class="slide__heading js-reveal">HTTP+SSE → Streamable HTTP</h2>
-          <p class="slide__lead js-reveal">
-            <strong>Було (2024-11-05):</strong> два endpoint — SSE + POST, подія <code>endpoint</code> при GET.
-          </p>
-          <p class="slide__lead js-reveal">
-            <strong>Зараз (2025-06-18):</strong> один endpoint POST+GET, SSE — частина Streamable HTTP, сесії через <code>Mcp-Session-Id</code>.
-          </p>
-          <p class="slide__lead js-reveal">
-            Нові проєкти — <code>transport="streamable-http"</code>. <code>transport="sse"</code> — legacy.
-          </p>
         </div>
       </section>
 
@@ -963,7 +1065,7 @@ mcp.run(transport="sse", host="127.0.0.1", port=8000)</code></pre>
 
     <nav class="nav" aria-label="Навігація по слайдах">
       <button type="button" class="nav__btn" id="prev" aria-label="Попередній слайд">←</button>
-      <span class="nav__progress" id="navProgress" aria-live="polite">1 / 32</span>
+      <span class="nav__progress" id="navProgress" aria-live="polite">1 / 31</span>
       <div class="nav__dots" id="dots" role="tablist" aria-label="Слайди"></div>
       <button type="button" class="nav__btn" id="next" aria-label="Наступний слайд">→</button>
     </nav>
