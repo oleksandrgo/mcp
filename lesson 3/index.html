@@ -109,10 +109,6 @@
           <p class="slide__lead js-reveal">
             MCP — універсальний інтерфейс (аналог <strong>USB-C</strong>): один Server підключається до різних AI-додатків без змін.
           </p>
-          <ul class="content-list">
-            <li class="content-list__item js-reveal">інтеграції пишуться один раз</li>
-            <li class="content-list__item js-reveal">немає залежності від конкретного LLM</li>
-          </ul>
         </div>
       </section>
 
@@ -607,6 +603,48 @@ async with stdio_server() as streams:
                 Зробити → <strong>tools</strong> · Прочитати → <strong>resources</strong> · Стандартизувати → <strong>prompts</strong>
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide--code" aria-label="Tools, Resources і Prompts — код">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--code">
+          <p class="slide__eyebrow js-reveal">Tools, Resources і Prompts</p>
+          <h2 class="slide__heading js-reveal">Один файл — три сутності</h2>
+          <p class="slide__lead js-reveal">
+            Приклад MCP Server на Python: <strong>tool</strong>, <strong>resource</strong> і <strong>prompt</strong> в одному
+            <code>server.py</code>.
+          </p>
+          <div class="token-card js-reveal">
+            <pre class="slide__code slide__code--compact"><code>from fastmcp import FastMCP
+
+mcp = FastMCP("demo-server")
+
+# Tool — дія
+@mcp.tool
+def create_jira_issue(title: str, description: str) -> str:
+    """Створити issue в Jira."""
+    return f"Issue created: {title}"
+
+# Resource — контекст
+@mcp.resource("db://schema.sql")
+def db_schema() -> str:
+    """Схема таблиць БД."""
+    return "CREATE TABLE users (id INT, email TEXT)"
+
+# Prompt — шаблон
+@mcp.prompt
+def code_review(path: str) -> str:
+    """Шаблон code review."""
+    return f"Review {path}: style, tests, security"
+
+if __name__ == "__main__":
+    mcp.run()</code></pre>
           </div>
         </div>
       </section>

@@ -483,6 +483,15 @@ body {
   font-family: inherit;
 }
 
+.slide__inner--code {
+  width: min(92vw, 920px);
+}
+
+.slide__code--compact {
+  font-size: clamp(0.56rem, 0.95vw, 0.72rem);
+  line-height: 1.42;
+}
+
 .slide__diagram-img {
   display: block;
   width: min(100%, 920px);
