@@ -974,11 +974,11 @@ if __name__ == "__main__":
         <div class="slide__inner slide__inner--title">
           <p class="slide__eyebrow js-reveal">Блок 6</p>
           <h2 class="slide__title js-reveal">Deprecated HTTP+SSE</h2>
-          <p class="slide__subtitle js-reveal">Legacy transport</p>
+          <p class="slide__subtitle js-reveal">HTTP → SSE → Streamable HTTP</p>
         </div>
       </section>
 
-      <section class="slide" aria-label="Legacy vs новий transport">
+      <section class="slide" aria-label="Повна картина HTTP SSE Streamable HTTP">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
         </video>
@@ -986,16 +986,192 @@ if __name__ == "__main__":
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
         <div class="slide__inner slide__inner--content">
           <p class="slide__eyebrow js-reveal">Deprecated</p>
-          <h2 class="slide__heading js-reveal">HTTP+SSE → Streamable HTTP</h2>
+          <h2 class="slide__heading js-reveal">Повна картина</h2>
           <p class="slide__lead js-reveal">
-            <strong>Було (2024-11-05):</strong> два endpoint — SSE + POST, подія <code>endpoint</code> при GET.
+            Чому в MCP з'явився <strong>Streamable HTTP</strong> і чому <strong>HTTP+SSE</strong> — legacy.
           </p>
+          <ul class="content-list content-list--compact">
+            <li class="content-list__item js-reveal"><strong>Крок 1</strong> — звичайний HTTP/1.1</li>
+            <li class="content-list__item js-reveal"><strong>Крок 2</strong> — SSE: відкрите з'єднання і два endpoint в MCP</li>
+            <li class="content-list__item js-reveal"><strong>Крок 3</strong> — Streamable HTTP: один endpoint і chunked-відповідь</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide slide--http-story" aria-label="Крок 1 — Звичайний HTTP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--http-flow">
+          <p class="slide__eyebrow js-reveal">Крок 1</p>
+          <h2 class="slide__heading js-reveal">Звичайний HTTP/1.1</h2>
+          <div class="token-card js-reveal">
+            <pre class="http-flow http-flow--light"><code>Клієнт ──── запит ────► Сервер
+Клієнт ◄─── відповідь ── Сервер
+✓ з'єднання закрито</code></pre>
+          </div>
+          <p class="slide__lead js-reveal">Клієнт запитав → сервер відповів → з'єднання закрилось.</p>
+          <p class="slide__lead slide__lead--warn js-reveal"><strong>Проблеми:</strong></p>
+          <ul class="content-list content-list--compact content-list--http-story">
+            <li class="content-list__item content-list__item--warning">
+              <strong>Немає стримінгу</strong> — чекаєш увесь відповідь цілком, поганий UX
+            </li>
+            <li class="content-list__item content-list__item--warning">
+              Сервер не може сам надіслати дані клієнту без нового запиту
+            </li>
+            <li class="content-list__item content-list__item--warning">
+              <strong>Довгі операції</strong> — якщо AI «думає» 30 секунд, з'єднання просто висить і ти не знаєш, що відбувається
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide slide--http-story" aria-label="SSE в MCP — канал 1">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--http-flow">
+          <p class="slide__eyebrow js-reveal">Крок 2</p>
+          <h2 class="slide__heading js-reveal">SSE в MCP · канал 1</h2>
+          <p class="slide__lead js-reveal">Слухаємо сервер — тримаємо з'єднання відкритим:</p>
+          <div class="token-card js-reveal">
+            <pre class="http-flow http-flow--light"><code># Канал 1 — слухаємо сервер
+Клієнт ──── GET /sse ─────────────► Сервер
+Клієнт ◄════ тримаємо відкритим ════ Сервер</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide--http-story" aria-label="SSE в MCP — канал 2">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--http-flow">
+          <p class="slide__eyebrow js-reveal">Крок 2</p>
+          <h2 class="slide__heading js-reveal">SSE в MCP · канал 2</h2>
+          <p class="slide__lead js-reveal">Надсилаємо команди окремим POST — відповідь приходить через перший канал:</p>
+          <div class="token-card js-reveal">
+            <pre class="http-flow http-flow--light"><code># Канал 2 — надсилаємо команди
+Клієнт ──── POST /message ────────► Сервер
+
+# Відповідь приходить через ПЕРШИЙ канал
+Клієнт ◄─── результат ────────────── Сервер</code></pre>
+          </div>
+          <ul class="content-list content-list--compact content-list--http-story">
+            <li class="content-list__item content-list__item--warning">Два endpoint — складно підтримувати</li>
+            <li class="content-list__item content-list__item--warning">З'єднання SSE треба тримати постійно</li>
+            <li class="content-list__item content-list__item--warning">Якщо SSE впав — усе ламається</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide slide--http-story" aria-label="Крок 3 — Streamable HTTP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--http-flow">
+          <p class="slide__eyebrow js-reveal">Крок 3</p>
+          <h2 class="slide__heading js-reveal">Streamable HTTP</h2>
           <p class="slide__lead js-reveal">
-            <strong>Зараз (2025-06-18):</strong> один endpoint POST+GET, сесії через <code>Mcp-Session-Id</code>.
+            HTTP/1.1 вміє слати відповідь <strong>кусками (chunked)</strong> — це і використовує сучасний MCP transport.
           </p>
+          <div class="token-card js-reveal">
+            <pre class="http-flow http-flow--light"><code>Клієнт ──── POST /mcp ─────────────► Сервер
+Клієнт ◄─── chunk 1 ──────────────── Сервер
+Клієнт ◄─── chunk 2 ──────────────── Сервер
+Клієнт ◄─── chunk 3 ──────────────── Сервер
+✓ з'єднання закрито</code></pre>
+          </div>
           <p class="slide__lead js-reveal">
-            Нові проєкти — <code>transport="streamable-http"</code>. <code>transport="sse"</code> — legacy.
+            Один endpoint, один запит, відповідь стримом — <strong>простіше і надійніше</strong>, ніж два канали SSE+POST.
           </p>
+        </div>
+      </section>
+
+      <section class="slide slide--compare" aria-label="Підсумкова таблиця HTTP SSE Streamable HTTP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--compare slide__inner--compare-wide">
+          <p class="slide__eyebrow js-reveal">Підсумок</p>
+          <h2 class="slide__heading js-reveal">HTTP vs SSE vs Streamable HTTP</h2>
+          <div class="compare-table-wrap js-reveal">
+            <table class="compare-table compare-table--matrix">
+              <colgroup>
+                <col class="compare-table__col-label" />
+                <col class="compare-table__col-data" />
+                <col class="compare-table__col-data" />
+                <col class="compare-table__col-data" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="compare-table__th"></th>
+                  <th scope="col" class="compare-table__th">Звичайний HTTP</th>
+                  <th scope="col" class="compare-table__th">SSE</th>
+                  <th scope="col" class="compare-table__th">Streamable HTTP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="content-list__item compare-table__row">
+                  <td class="compare-table__mark compare-table__mark--label">Endpoint</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>1</td>
+                </tr>
+                <tr class="content-list__item compare-table__row">
+                  <td class="compare-table__mark compare-table__mark--label">З'єднання</td>
+                  <td>Закривається</td>
+                  <td>Постійне</td>
+                  <td>Закривається</td>
+                </tr>
+                <tr class="content-list__item compare-table__row">
+                  <td class="compare-table__mark compare-table__mark--label">Стримінг</td>
+                  <td>✗</td>
+                  <td>✓</td>
+                  <td>✓</td>
+                </tr>
+                <tr class="content-list__item compare-table__row compare-table__row--pro">
+                  <td class="compare-table__mark compare-table__mark--label">У MCP</td>
+                  <td>Старий</td>
+                  <td>Старий</td>
+                  <td>Новий 2025</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Аналогія HTTP SSE Streamable HTTP">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/nextflix%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Аналогія</p>
+          <h2 class="slide__heading js-reveal">Три підходи простими словами</h2>
+          <ul class="content-list">
+            <li class="content-list__item js-reveal">
+              <strong>Звичайний HTTP</strong> — подзвонив, запитав, поклав слухавку
+            </li>
+            <li class="content-list__item js-reveal">
+              <strong>SSE</strong> — два телефони: один завжди слухає, другим говориш ти
+            </li>
+            <li class="content-list__item js-reveal">
+              <strong>Streamable HTTP</strong> — один телефон: подзвонив, відповідають поступово, поклав слухавку
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -1032,10 +1208,12 @@ if __name__ == "__main__":
             <pre class="slide__code"><code># stdio (за замовчуванням)
 mcp.run()
 
+# SSE (legacy)
+mcp.run(transport="sse", host="127.0.0.1", port=8000)
+
 # Streamable HTTP
 mcp.run(transport="streamable-http", host="127.0.0.1", port=8000)</code></pre>
           </div>
-          <p class="slide__lead js-reveal">Логіка tools/resources/prompts не змінюється — лише transport layer.</p>
         </div>
       </section>
 

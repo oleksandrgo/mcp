@@ -240,7 +240,9 @@
   }
 
   function getListItems(index) {
-    return slides[index] ? slides[index].querySelectorAll(".content-list__item") : [];
+    const slide = slides[index];
+    if (!slide) return [];
+    return slide.querySelectorAll(".content-list__item, .http-story__step");
   }
 
   function resetListItems(index) {
