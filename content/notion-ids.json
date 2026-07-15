@@ -31,6 +31,13 @@
       "konspekt": "39830ef38f268151ad5feef008a75f77",
       "quiz": "39830ef38f2681179a2ac2f192d069da",
       "video": "39830ef38f2681c4a93ad8776035a824"
+    },
+    "5": {
+      "title": "Створення локального MCP сервера (stdio)",
+      "page": "39e30ef38f26814881e0f808e87660e4",
+      "konspekt": "39e30ef38f26810baa76fda28f6f3013",
+      "quiz": "39e30ef38f2681318311f7d8ef059ac8",
+      "video": "39e30ef38f2681faa807cc6aab3672ad"
     }
   },
   "references": {
