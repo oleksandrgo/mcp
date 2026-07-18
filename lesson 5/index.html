@@ -64,8 +64,33 @@
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">02</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/python.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Налаштування середовища</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">03</span>
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/docker.svg" alt="" width="32" height="32" />
               <span class="plan-list__text">Server і FastMCP</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">04</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Створення простого stdio MCP сервера</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">05</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/jira.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Перший tool</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">06</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/json.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Debugging and MCP Inspector</span>
+            </li>
+            <li class="plan-list__item js-plan-step">
+              <span class="plan-list__num">07</span>
+              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/cursor-color.svg" alt="" width="32" height="32" />
+              <span class="plan-list__text">Підключення в Cursor і Claude Desktop</span>
             </li>
           </ol>
         </div>
@@ -147,11 +172,11 @@
         <div class="slide__inner slide__inner--title">
           <p class="slide__eyebrow js-reveal">Блок 2</p>
           <h2 class="slide__title js-reveal">Server і FastMCP</h2>
-          <p class="slide__subtitle js-reveal">Два підходи до MCP-сервера на Python</p>
+          <p class="slide__subtitle js-reveal">Два рівні абстракції в MCP Python SDK</p>
         </div>
       </section>
 
-      <section class="slide" aria-label="MCP Server низький рівень">
+      <section class="slide" aria-label="Два підходи">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
         </video>
@@ -159,14 +184,33 @@
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
         <div class="slide__inner slide__inner--content">
           <p class="slide__eyebrow js-reveal">Server і FastMCP</p>
-          <h2 class="slide__heading js-reveal">MCP Server (низький рівень)</h2>
+          <h2 class="slide__heading js-reveal">Два підходи</h2>
           <p class="slide__lead js-reveal">
-            Клас <strong>Server</strong> з Python SDK — повний контроль над протоколом MCP: handlers, async, transport вручну.
+            У MCP Python SDK є два способи створити сервер: низькорівневий <strong>Server</strong> і високорівневий <strong>FastMCP</strong>.
+          </p>
+          <p class="slide__lead js-reveal">
+            Головна різниця — <strong>рівень абстракції</strong>: скільки ви контролюєте самі, а скільки SDK робить за вас.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Server низький рівень">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Server і FastMCP</p>
+          <h2 class="slide__heading js-reveal">Server — низький рівень</h2>
+          <p class="slide__lead js-reveal">
+            Базовий клас офіційного SDK. Дає <strong>прямий доступ до протоколу</strong> — ви збираєте сервер вручну.
           </p>
           <ul class="content-list">
-            <li class="content-list__item js-reveal"><code>@app.list_tools()</code> і <code>@app.call_tool()</code></li>
-            <li class="content-list__item js-reveal">Явний <strong>stdio_server()</strong> для transport</li>
-            <li class="content-list__item js-reveal">Більше коду — більше гнучкості</li>
+            <li class="content-list__item js-reveal">Handlers вручну: <code>@server.list_tools()</code>, <code>@server.call_tool()</code></li>
+            <li class="content-list__item js-reveal">Повний контроль: схеми, помилки, lifecycle, трасування</li>
+            <li class="content-list__item js-reveal">Більше boilerplate — але немає «чорної скриньки»</li>
+            <li class="content-list__item js-reveal">Debug простіший: видно кожен крок протоколу</li>
           </ul>
         </div>
       </section>
@@ -179,14 +223,14 @@
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
         <div class="slide__inner slide__inner--content">
           <p class="slide__eyebrow js-reveal">Server і FastMCP</p>
-          <h2 class="slide__heading js-reveal">FastMCP (високий рівень)</h2>
+          <h2 class="slide__heading js-reveal">FastMCP — високий рівень</h2>
           <p class="slide__lead js-reveal">
-            <strong>FastMCP</strong> — обгортка над Server у пакеті <code>mcp</code>. Python-функції стають tools через декоратори.
+            Фреймворк поверх MCP: пишете Python-функцію — FastMCP сам будує схему, валідацію й документацію.
           </p>
           <ul class="content-list">
-            <li class="content-list__item js-reveal"><code>@mcp.tool()</code>, <code>@mcp.resource()</code>, <code>@mcp.prompt()</code></li>
-            <li class="content-list__item js-reveal">Схема tool — з type hints і docstring</li>
-            <li class="content-list__item js-reveal"><code>mcp.run(transport="stdio")</code> — transport «з коробки»</li>
+            <li class="content-list__item js-reveal">Декоратори <code>@tool</code>, <code>@resource</code>, <code>@prompt</code> замість handlers</li>
+            <li class="content-list__item js-reveal">Менше коду, швидший старт — де-факто стандарт спільноти</li>
+            <li class="content-list__item js-reveal">Менше прозорості: внутрішня механіка як «чорна скринька»</li>
           </ul>
         </div>
       </section>
@@ -199,7 +243,7 @@
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
         <div class="slide__inner slide__inner--content slide__inner--compare-wide">
           <p class="slide__eyebrow js-reveal">Server і FastMCP</p>
-          <h2 class="slide__heading js-reveal">Коли що обирати</h2>
+          <h2 class="slide__heading js-reveal">У чому різниця</h2>
           <div class="compare-table-wrap js-reveal">
             <table class="compare-table compare-table--matrix">
               <colgroup>
@@ -210,34 +254,59 @@
               <thead>
                 <tr>
                   <th scope="col" class="compare-table__th"></th>
-                  <th scope="col" class="compare-table__th">MCP Server</th>
+                  <th scope="col" class="compare-table__th">Server</th>
                   <th scope="col" class="compare-table__th">FastMCP</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="content-list__item compare-table__row">
-                  <td class="compare-table__mark compare-table__mark--label">Рівень</td>
-                  <td>Низький</td>
-                  <td>Високий</td>
+                  <td class="compare-table__mark compare-table__mark--label">Код</td>
+                  <td>Більше boilerplate</td>
+                  <td>Мінімум, декоратори</td>
                 </tr>
                 <tr class="content-list__item compare-table__row">
-                  <td class="compare-table__mark compare-table__mark--label">Tool</td>
-                  <td>handlers вручну</td>
-                  <td><code>@mcp.tool()</code></td>
+                  <td class="compare-table__mark compare-table__mark--label">Контроль</td>
+                  <td>Повний, ручний</td>
+                  <td>Обмежений «з коробки»</td>
                 </tr>
                 <tr class="content-list__item compare-table__row">
-                  <td class="compare-table__mark compare-table__mark--label">Transport</td>
-                  <td><code>stdio_server()</code></td>
-                  <td><code>mcp.run()</code></td>
+                  <td class="compare-table__mark compare-table__mark--label">Debug</td>
+                  <td>Простіший — усе видно</td>
+                  <td>Складніший — менше видимості</td>
+                </tr>
+                <tr class="content-list__item compare-table__row">
+                  <td class="compare-table__mark compare-table__mark--label">Швидкість</td>
+                  <td>Повільніша розробка</td>
+                  <td>Швидший старт</td>
                 </tr>
                 <tr class="content-list__item compare-table__row compare-table__row--pro">
-                  <td class="compare-table__mark compare-table__mark--label">На курсі</td>
-                  <td>Для розуміння</td>
-                  <td>Live-демо</td>
+                  <td class="compare-table__mark compare-table__mark--label">Auth / composition</td>
+                  <td>Пишете самі</td>
+                  <td>Часто вже вбудовано</td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Коли що обирати">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/northern%20lights%20slide.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content">
+          <p class="slide__eyebrow js-reveal">Server і FastMCP</p>
+          <h2 class="slide__heading js-reveal">Коли що обирати</h2>
+          <ul class="content-list">
+            <li class="content-list__item js-reveal">
+              <strong>FastMCP</strong> — сервер з нуля, stdio або Streamable HTTP, швидкий старт. На курсі — основний шлях.
+            </li>
+            <li class="content-list__item js-reveal">
+              <strong>Server</strong> — потрібен повний контроль над протоколом, кастомна логіка або debug на рівні специфікації.
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -313,7 +382,7 @@ def add(a: int, b: int) -> int:
 if __name__ == "__main__":
     mcp.run(transport="stdio")</code></pre>
           </div>
-          <p class="slide__lead js-reveal">Той самий tool <code>add</code> — значно менше коду. Далі працюємо саме з <strong>FastMCP</strong>.</p>
+          <p class="slide__lead js-reveal">Той самий tool <code>add</code> — значно менше коду. На курсі далі працюємо з <strong>FastMCP</strong>.</p>
         </div>
       </section>
 
@@ -328,10 +397,10 @@ if __name__ == "__main__":
           <p class="slide__eyebrow js-reveal">Фінал заняття</p>
           <h2 class="slide__heading js-reveal">Підсумки</h2>
           <p class="slide__lead js-reveal">
-            На цій лекції ми розібрали різницю між <strong>MCP Server</strong> і <strong>FastMCP</strong> — два підходи до написання MCP-сервера на Python.
+            На цій лекції ми розібрали різницю між <strong>Server</strong> і <strong>FastMCP</strong> — два рівні абстракції в MCP Python SDK.
           </p>
           <p class="slide__lead js-reveal">
-            Тепер ви розумієте, коли потрібен низькорівневий контроль, а коли достатньо швидкого старту з декораторами.
+            Тепер ви розумієте: FastMCP — швидкий старт, Server — повний контроль і прозорість протоколу.
           </p>
           <p class="slide__lead js-reveal">
             Далі — практика: stdio-сервер, tools, Inspector і підключення в Host.
@@ -342,7 +411,7 @@ if __name__ == "__main__":
 
     <nav class="nav" aria-label="Навігація по слайдах">
       <button type="button" class="nav__btn" id="prev" aria-label="Попередній слайд">←</button>
-      <span class="nav__progress" id="navProgress" aria-live="polite">1 / 12</span>
+      <span class="nav__progress" id="navProgress" aria-live="polite">1 / 14</span>
       <div class="nav__dots" id="dots" role="tablist" aria-label="Слайди"></div>
       <button type="button" class="nav__btn" id="next" aria-label="Наступний слайд">→</button>
     </nav>
