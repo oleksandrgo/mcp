@@ -88,16 +88,6 @@
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="24" height="24" />
               <span class="plan-list__text">Правила та рекомендації</span>
             </li>
-            <li class="plan-list__item js-plan-step">
-              <span class="plan-list__num">07</span>
-              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/json.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Корисні посилання</span>
-            </li>
-            <li class="plan-list__item js-plan-step">
-              <span class="plan-list__num">08</span>
-              <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Промпт для агента</span>
-            </li>
           </ol>
         </div>
       </section>
@@ -165,7 +155,7 @@
             Спочатку — додаток і повний JSON-контракт API. Потім — один <code>main.py</code> з базовим tool <code>signup</code>.
           </p>
           <p class="slide__lead js-reveal">
-            Спільний <code>AsyncClient</code> тримає cookie сесії після signup. На фініші — готовий промпт, щоб відтворити сервер з агентом.
+            Спільний <code>AsyncClient</code> тримає cookie сесії після signup. На виході — робочий qauto MCP server, готовий до розширення новими методами.
           </p>
         </div>
       </section>
@@ -615,10 +605,7 @@ async def test_create_task():
             На цій лекції — API qauto, <strong>MCP server</strong> в <code>main.py</code> і <strong>правила</strong> для якісних tools.
           </p>
           <p class="slide__lead js-reveal">
-            Також є готовий <strong>промпт для агента</strong>, щоб відтворити сервер vibe-coding підходом.
-          </p>
-          <p class="slide__lead js-reveal">
-            Далі — <strong>prompts</strong> в MCP: готові шаблони запитів для агента.
+            Далі — <strong>signin</strong>, <strong>add_car</strong> і <strong>get_cars</strong> для повноцінної роботи з гаражем.
           </p>
         </div>
       </section>
