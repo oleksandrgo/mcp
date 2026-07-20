@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hillel MAX — Урок 6 · Розробка qauto MCP server</title>
+    <title>Hillel MAX — Урок 7 · Додавання нових методів і розширення функціоналу MCP</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,8 +34,8 @@
               IT · Model Context Protocol
             </span>
           </p>
-          <h1 class="slide__title js-reveal">Розробка qauto MCP server</h1>
-          <p class="slide__subtitle js-reveal">Практика: від API додатку до tools для агента</p>
+          <h1 class="slide__title js-reveal">Додавання нових методів і розширення функціоналу MCP</h1>
+          <p class="slide__subtitle js-reveal">Практика: signin, add_car, get_cars і сесія клієнта</p>
           <div class="tech-chips js-reveal" aria-hidden="true">
             <span class="tech-chip"><img src="../video%20and%20pcitures/icons/python-color.svg" alt="" />Python</span>
             <span class="tech-chip"><img src="../video%20and%20pcitures/icons/mcp-color.svg" alt="" />FastMCP</span>
@@ -55,7 +55,7 @@
         <div class="slide__scrim slide__scrim--plan"></div>
         <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
         <div class="slide__inner slide__inner--plan">
-          <p class="slide__eyebrow slide__eyebrow--accent js-reveal-plan-header">Урок 6</p>
+          <p class="slide__eyebrow slide__eyebrow--accent js-reveal-plan-header">Урок 7</p>
           <h2 class="slide__heading js-reveal-plan-header">План заняття</h2>
           <ol class="plan-list">
             <li class="plan-list__item js-plan-step">
@@ -76,27 +76,27 @@
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">04</span>
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/json.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Огляд API методів</span>
+              <span class="plan-list__text">Додавання нових методів</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">05</span>
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/python.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Додавання API-методу signup</span>
+              <span class="plan-list__text">signin, add_car та get_cars</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">06</span>
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Правила та рекомендації</span>
+              <span class="plan-list__text">get_client і client JSON</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">07</span>
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/json.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Корисні посилання</span>
+              <span class="plan-list__text">Практика перевірки</span>
             </li>
             <li class="plan-list__item js-plan-step">
               <span class="plan-list__num">08</span>
               <img class="plan-list__icon" src="../video%20and%20pcitures/icons/w/mcp.svg" alt="" width="24" height="24" />
-              <span class="plan-list__text">Промпт для агента</span>
+              <span class="plan-list__text">Рекомендації по коду</span>
             </li>
           </ol>
         </div>
@@ -136,13 +136,13 @@
           <p class="slide__eyebrow js-reveal">Вступ</p>
           <h2 class="slide__heading js-reveal">Від демо до qauto</h2>
           <p class="slide__lead js-reveal">
-            На попередній лекції — мінімальний MCP на <strong>FastMCP</strong> і <strong>stdio</strong>: один tool і перевірка в Inspector.
+            На попередній лекції — qauto MCP server з базовим tool <code>signup</code> і перевіркою в Inspector.
           </p>
           <p class="slide__lead js-reveal">
-            Сьогодні підключаємо сервер до REST API навчального додатку <strong>qauto</strong> (Hillel Auto).
+            Сьогодні розширюємо сервер: додаємо <strong>signin</strong>, <strong>add_car</strong> і <strong>get_cars</strong>.
           </p>
           <p class="slide__lead js-reveal">
-            Мета: агент реєструє user, додає авто в гараж і читає список машин — природною мовою, без кліків у UI.
+            Мета: агент входить у акаунт, додає авто в гараж і читає список машин — природною мовою, без кліків у UI.
           </p>
         </div>
       </section>
@@ -162,10 +162,10 @@
             Стек: <strong>mcp[cli]</strong>, <strong>httpx</strong>, <strong>pydantic</strong>, <strong>python-dotenv</strong>.
           </p>
           <p class="slide__lead js-reveal">
-            Спочатку — додаток і повний JSON-контракт API. Потім — один <code>main.py</code> з базовим tool <code>signup</code>.
+            Додамо <code>signin</code> для входу в існуючий акаунт і методи гаражу: <code>add_car</code>, <code>get_cars</code>.
           </p>
           <p class="slide__lead js-reveal">
-            Спільний <code>AsyncClient</code> тримає cookie сесії після signup. На фініші — готовий промпт, щоб відтворити сервер з агентом.
+            Спільний <code>get_client()</code> тримає cookie <code>sid</code> після <code>signin</code> або <code>signup</code> для всіх наступних tools.
           </p>
         </div>
       </section>
@@ -233,8 +233,36 @@
         </div>
       </section>
 
-      <!-- Block: Правила та рекомендації -->
-      <section class="slide slide--block-intro" aria-label="Блок — Правила та рекомендації">
+      <section class="slide slide--code" aria-label="Метод signin">
+        <video class="slide__video" autoplay muted loop playsinline preload="auto">
+          <source src="../video%20and%20pcitures/Video/ice%20cubes.mp4" type="video/mp4" />
+        </video>
+        <div class="slide__scrim"></div>
+        <div class="slide__glow slide__glow--soft" aria-hidden="true"></div>
+        <div class="slide__inner slide__inner--content slide__inner--code">
+          <p class="slide__eyebrow js-reveal">Нові методи</p>
+          <h2 class="slide__heading js-reveal">signin</h2>
+          <p class="slide__lead js-reveal">
+            Вхід у вже існуючий акаунт через <code>POST /auth/signin</code>. Після успіху в <code>get_client()</code> зберігається cookie <code>sid</code>.
+          </p>
+          <div class="token-card js-reveal">
+            <pre class="slide__code slide__code--compact"><code>@mcp.tool()
+async def signin(email: str, password: str) -> dict:
+    """Увійти в qauto і зберегти сесію."""
+    payload = SignInInput(
+        email=email,
+        password=password,
+    ).model_dump()
+    client = get_client()
+    response = await client.post("/auth/signin", json=payload)
+    response.raise_for_status()
+    return response.json()</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Block: get_client і client JSON -->
+      <section class="slide slide--block-intro" aria-label="Блок — get_client і client JSON">
         <video class="slide__video" autoplay muted loop playsinline preload="auto">
           <source src="../video%20and%20pcitures/Video/screensaver%20slide.mp4" type="video/mp4" />
         </video>
@@ -248,7 +276,7 @@
         />
         <div class="slide__inner slide__inner--title">
           <p class="slide__eyebrow js-reveal">Блок 6</p>
-          <h2 class="slide__title js-reveal">Правила та рекомендації</h2>
+          <h2 class="slide__title js-reveal">get_client і client JSON</h2>
           <p class="slide__subtitle js-reveal">Як описувати MCP tools для моделі</p>
         </div>
       </section>
@@ -612,13 +640,13 @@ async def test_create_task():
           <p class="slide__eyebrow js-reveal">Фінал заняття</p>
           <h2 class="slide__heading js-reveal">Підсумки</h2>
           <p class="slide__lead js-reveal">
-            На цій лекції — API qauto, <strong>MCP server</strong> в <code>main.py</code> і <strong>правила</strong> для якісних tools.
+            На цій лекції ми додали <strong>signin</strong>, <strong>add_car</strong>, <strong>get_cars</strong> і спільний <strong>get_client</strong> для сесії.
           </p>
           <p class="slide__lead js-reveal">
-            Також є готовий <strong>промпт для агента</strong>, щоб відтворити сервер vibe-coding підходом.
+            Тепер агент може увійти в акаунт і керувати гаражем через tools без ручних дій у веб-інтерфейсі.
           </p>
           <p class="slide__lead js-reveal">
-            Далі — <strong>prompts</strong> в MCP: готові шаблони запитів для агента.
+            Далі — <strong>prompts</strong> в MCP: як будувати повторно використовувані шаблони запитів.
           </p>
         </div>
       </section>
