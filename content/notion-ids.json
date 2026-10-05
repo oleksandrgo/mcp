@@ -52,6 +52,32 @@
       "konspekt": "3a330ef38f2681f98a85fa43ee383d3e",
       "quiz": "3a330ef38f268109ae5ec39a7b50bea0",
       "video": "3a330ef38f2681d98db1c68874b74d1f"
+    },
+    "8": {
+      "title": "Використання prompts в MCP",
+      "page": "3a530ef38f2681038f83c8ebaaf9e1d8",
+      "konspekt": "3a530ef38f26817d8140f0c9f2ed8aea",
+      "quiz": "3a530ef38f26810fa6a0e40a1f9f3eb3",
+      "video": "3a530ef38f2681b398cbe65862491067"
+    },
+    "9": {
+      "title": "Використання resources в MCP",
+      "page": "3ad30ef38f2681238abec89685109f23",
+      "konspekt": "3ad30ef38f2681b98f44dd4e4856b8f8",
+      "quiz": "3ad30ef38f26815fb6b1e2faaf2d8764",
+      "video": "3ad30ef38f26810ba0c1ef7d0341a784"
+    },
+    "10": {
+      "title": "Покращення і структурізація MCP сервера",
+      "page": "3b030ef38f2681a1a956f1fb902e937e",
+      "konspekt": "3b030ef38f268198baaecaa80fa887ce",
+      "video": "3b030ef38f268161998dfe2aca82e9b1"
+    },
+    "11": {
+      "title": "Міграція MCP на Streamable HTTP",
+      "page": "3b030ef38f2681319c46c0334399966e",
+      "konspekt": "3b030ef38f268126bd5ae420826fc605",
+      "video": "3b030ef38f2681a58632d414e45d234c"
     }
   },
   "references": {
